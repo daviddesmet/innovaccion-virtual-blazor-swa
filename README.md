@@ -1,3 +1,5 @@
+![Azure Static Web Apps CI/CD](https://github.com/daviddesmet/innovaccion-virtual-blazor-swa/workflows/Azure%20Static%20Web%20Apps%20CI/CD/badge.svg)
+
 # Blazor Starter Application
 
 This template contains an example [Blazor WebAssembly](https://docs.microsoft.com/aspnet/core/blazor/?view=aspnetcore-3.1#blazor-webassembly) client application, a C# [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview) and a C# class library with shared code.
