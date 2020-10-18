@@ -1,0 +1,55 @@
+﻿@page "/weather"
+@using BlazorApp.Shared
+@using System.Globalization
+@inject HttpClient Http
+
+<h1>Pronóstico del tiempo</h1>
+
+<p>León, Guanajuato.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Temp. Max</th>
+                <th>Temp. Min</th>
+                <th>Resumen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in forecasts)
+            {
+                <tr>
+                    @*<td>@forecast.Date.ToShortDateString()</td>*@
+                    @*<td>@forecast.Date.ToString("dddd", new CultureInfo("es-MX"))</td>*@
+                    <td>@forecast.DateFormatFriendly</td>
+                    <td>@forecast.TemperatureMaxC</td>
+                    <td>@forecast.TemperatureMinC</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private WeatherForecast[] forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+      try
+      {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("/api/ForecastConagua");
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine(ex.ToString());
+      }
+    }
+}
